@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent">
+
+<LinearLayout android:orientation="vertical" android:layout_height="fill_parent" android:layout_width="fill_parent" >
+
+<!--штрихкод -->
+<LinearLayout  android:orientation="horizontal" android:layout_height="wrap_content" android:layout_width="fill_parent">
+    <TextView android:text="штрихкод: " android:gravity="right" android:layout_height="wrap_content" android:layout_width="1dp" android:layout_weight="1"/>
+    <TextView android:id="@+id/articel_bcode" android:text="123" android:gravity="left" android:layout_height="wrap_content" android:layout_width="1dp" android:layout_weight="3" />
+</LinearLayout>
+<!--конец штрихкод -->
+
+    <!--код 1С -->
+    <LinearLayout android:orientation="horizontal" android:layout_height="wrap_content" android:layout_width="fill_parent">
+        <TextView android:text="Код 1С:" android:gravity="right" android:layout_height="wrap_content" android:layout_width="1dp" android:layout_weight="1"/>
+        <TextView android:id="@+id/articel_1c_code" android:text="123" android:gravity="left" android:layout_height="wrap_content" android:layout_width="1dp" android:layout_weight="3" />
+    </LinearLayout>
+    <!--конец код 1С -->
+
+    <!--Название -->
+    <LinearLayout android:orientation="horizontal" android:layout_height="wrap_content" android:layout_width="fill_parent">
+        <TextView android:text="Название: " android:gravity="right" android:layout_height="wrap_content" android:layout_width="1dp" android:layout_weight="1"/>
+        <TextView android:id="@+id/articel_name" android:text="123" android:gravity="left" android:layout_height="wrap_content" android:layout_width="1dp" android:layout_weight="3" />
+    </LinearLayout>
+    <!--конец Название -->
+
+    <!--Артикль -->
+    <LinearLayout android:orientation="horizontal" android:layout_height="wrap_content" android:layout_width="fill_parent">
+        <TextView android:text="Артикль: " android:gravity="right" android:layout_height="wrap_content" android:layout_width="1dp" android:layout_weight="1"/>
+        <TextView android:id="@+id/articel_art_id" android:text="123" android:gravity="left" android:layout_height="wrap_content" android:layout_width="1dp" android:layout_weight="3" />
+    </LinearLayout>
+    <!--конец Артикль -->
+
+    <!--название полное -->
+    <LinearLayout android:orientation="horizontal" android:layout_height="wrap_content" android:layout_width="fill_parent">
+        <TextView android:text="название полное: " android:gravity="right" android:layout_height="wrap_content" android:layout_width="1dp" android:layout_weight="1"/>
+        <TextView android:id="@+id/articel_name_full" android:text="123" android:gravity="left" android:layout_height="wrap_content" android:layout_width="1dp" android:layout_weight="3" />
+    </LinearLayout>
+    <!--конец Артикль -->
+
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+
+    <EditText android:id="@+id/article_v_count" android:digits="0123456789" android:hint="фактическое кол-во" android:inputType="phone" android:layout_weight="2" android:layout_height="wrap_content" android:layout_width="0dp"/>
+
+   <Button android:id="@+id/article_ok" android:layout_weight="1" android:layout_height="wrap_content" android:layout_width="0dp" android:text="ok"/>
+    </LinearLayout>
+</LinearLayout>
+
+</LinearLayout>
