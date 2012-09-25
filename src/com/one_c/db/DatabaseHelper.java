@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 /**
  * Created by IntelliJ IDEA.
@@ -32,7 +31,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.execSQL("CREATE TABLE stores (id INTEGER PRIMARY KEY, name TEXT, kod TEXT)");
         
-        db.execSQL("CREATE TABLE scaned (id integer PRIMARY KEY,barcode text,kod text,name text,article text,FullName text,store_id integer,count integer)");
+        db.execSQL("CREATE TABLE scaned (id integer PRIMARY KEY,barcode text,kod text,name text,article text,FullName text,count integer,id_store text, unit text)");
 
         /*
 
@@ -119,25 +118,27 @@ public void removeAllStores(){
 /***************************************
  scaned
  ***************************************/
-public long insertToScaned(String barcode, String kod, String name, String article, String FullName, int store_id,int count) {
+public long insertToScaned(String barcode, String kod, String name, String article, String FullName,int count, String id_store, String unit ) {
     SQLiteDatabase db=this.getWritableDatabase();
-    ContentValues cv=new ContentValues(2);
+    ContentValues cv=new ContentValues();
     cv.put("barcode" ,barcode);
     cv.put("kod" ,kod);
     cv.put("name" ,name);
     cv.put("article" ,article);
     cv.put("FullName" ,FullName);
-    cv.put("store_id" ,store_id);
+    //cv.put("store_id" ,store_id);
     cv.put("count",count);
+    cv.put("id_store",id_store);
+    cv.put("unit",unit);
     long  res=db.insert("scaned",null,cv);
     db.close();
     return res;
 }
 
-public Cursor getAllScaned()
+public Cursor getAllScaned(String id_store)
     {
         SQLiteDatabase db=this.getReadableDatabase();
-        Cursor cur=db.rawQuery("SELECT * from scaned",new String [] {});
+        Cursor cur=db.rawQuery("SELECT * from scaned where id_store=?",new String [] {id_store});
         cur.moveToFirst();
         db.close();
         return cur;
@@ -145,7 +146,7 @@ public Cursor getAllScaned()
     public void removeAllScaned(){
         SQLiteDatabase db=this.getWritableDatabase();
         db.execSQL("DROP TABLE IF EXISTS "+"scaned");
-        db.execSQL("CREATE TABLE scaned (id integer PRIMARY KEY,barcode text,kod text,name text,article text,FullName text,store_id integer,count integer)");
+        db.execSQL("CREATE TABLE scaned (id integer PRIMARY KEY,barcode text,kod text,name text,article text,FullName text,count integer,id_store text, unit text)");
         db.close();
     };
 
@@ -177,14 +178,14 @@ public Cursor getAllScaned()
 
     }
 
-    public int getScanedIdByBare(String barcode)
+    public int getScanedIdByBare(String barcode,String id_store)
     {
         SQLiteDatabase db=this.getReadableDatabase();
         Cursor cur;
-       String s= String.format("SELECT * from scaned where barcode='"+barcode+"'",new String [] {});
-        Log.d("selectBare", s);
+      // String s= String.format("SELECT * from scaned where barcode='"+barcode+"' ",new String [] {});
+      //  Log.d("selectBare", s);
 
-              cur= db.rawQuery("SELECT * from scaned where barcode='"+barcode+"'",new String [] {});
+              cur= db.rawQuery("SELECT * from scaned where barcode='"+barcode+"' and id_store=?",new String [] {id_store});
         cur.moveToFirst();
         int res=-1;
         if(cur.getCount()>0){res=cur.getInt(0); }

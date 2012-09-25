@@ -62,7 +62,7 @@ public class articleEdit extends Activity {
         final String fullName=c.getString(5);
         ((TextView) findViewById(R.id.articel_name_full)).setText(fullName);
 
-        ((EditText) con.findViewById(R.id.article_v_count)).setText(c.getString(7));
+        ((EditText) con.findViewById(R.id.article_v_count)).setText(c.getString(6));
 
         findViewById(R.id.article_ok).setOnClickListener(new View.OnClickListener() {
             @Override

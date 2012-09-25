@@ -29,7 +29,10 @@ public class articleRequest {
 
         DatabaseHelper dh=new DatabaseHelper(con);
         // String barecode=sym.getData().toString();
-        int id= dh.getScanedIdByBare(idBare);
+        fileLib fl=new fileLib(con);
+        String id_store=fl.read("currentCode").split(";")[2];
+
+        int id= dh.getScanedIdByBare(idBare,id_store);
         if(id!=-1){
             Intent i=new Intent(con,articleEdit.class);
             i.putExtra("id",""+id);

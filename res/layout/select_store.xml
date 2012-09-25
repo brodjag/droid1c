@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent" android:orientation="vertical">
+ <!--head -->
+<LinearLayout android:background="#aaa" android:orientation="horizontal" android:layout_height="50dp" android:layout_width="fill_parent">
+     <TextView android:textColor="#000" android:gravity="center" android:textSize="18dp" android:textStyle="bold" android:layout_height="fill_parent" android:layout_width="fill_parent" android:text="Выбор склада" />
+</LinearLayout>
+<!-- end head -->
+
+
+<!--scroll list -->
+    <LinearLayout android:layout_height="0dp" android:layout_weight="1" android:layout_width="fill_parent" >
+               <ScrollView android:layout_height="fill_parent" android:layout_width="fill_parent">
+                            <!--Scroll body -->
+                            <LinearLayout android:id="@+id/store_list"   android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:background="#fff">
+
+
+                            </LinearLayout>
+                            <!--end Scroll body -->
+
+
+               </ScrollView>
+    </LinearLayout>
+<!--scroll list -->
+
+
+</LinearLayout>

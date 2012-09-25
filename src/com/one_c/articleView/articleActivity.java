@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.one_c.R;
 import com.one_c.db.DatabaseHelper;
+import com.one_c.lib.fileLib;
 import com.one_c.lib.saveFile;
 import com.one_c.scanedList;
 import org.w3c.dom.Element;
@@ -58,6 +59,10 @@ public class articleActivity extends Activity {
          fullName=Return.getElementsByTagName("m:FullName").item(0).getFirstChild().getNodeValue();
         ((TextView) findViewById(R.id.articel_name_full)).setText(fullName);
 
+        //unit
+        unit=Return.getElementsByTagName("m:Unit").item(0).getFirstChild().getNodeValue();
+        ((TextView) findViewById(R.id.articel_unit)).setText(unit);
+
         findViewById(R.id.article_ok).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,8 +87,11 @@ private void nextView(){
     }catch (Exception e){
         count=0;
     }
+
+    fileLib fl=new fileLib(con);
+    String id_store= fl.read("currentCode").split(";")[2];
     DatabaseHelper dh=new DatabaseHelper(con);
-    double r= dh.insertToScaned(brCode,code_1C,name,article,fullName,1,count);
+    double r= dh.insertToScaned(brCode,code_1C,name,article,fullName,count,id_store,unit);
     if(r>0){Toast.makeText(con,"добавлено",Toast.LENGTH_SHORT).show();}else {
         Toast.makeText(con,"ошибка добавления",Toast.LENGTH_SHORT).show();
     }
@@ -102,5 +110,6 @@ private void nextView(){
      String name;
      String article;
      String fullName;
+    String unit;
 
 }

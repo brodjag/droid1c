@@ -4,16 +4,25 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     >
-<Spinner android:id="@+id/stores_pinner" android:layout_height="wrap_content" android:layout_width="fill_parent" />
-    <ScrollView android:background="#999" android:layout_height="0dp" android:layout_width="fill_parent" android:layout_weight="1">
-        <LinearLayout android:id="@+id/list_skd" android:layout_height="wrap_content" android:layout_width="fill_parent" android:orientation="vertical">
+    <!--head -->
+    <LinearLayout android:background="#aaa" android:orientation="horizontal" android:layout_height="50dp" android:layout_width="fill_parent">
+        <TextView android:id="@+id/store_name" android:textColor="#000" android:gravity="center" android:textSize="18dp" android:textStyle="bold"
+                  android:layout_height="fill_parent" android:layout_width="fill_parent" android:text="Cклад: Розница" />
+    </LinearLayout>
+    <!-- end head -->
+    <ScrollView android:background="#000" android:layout_height="0dp" android:layout_width="fill_parent" android:layout_weight="1">
+        <LinearLayout android:id="@+id/list_skd" android:background="#999" android:layout_height="wrap_content" android:layout_width="fill_parent" android:orientation="vertical">
 
 
 
         </LinearLayout>
     </ScrollView>
 
-
-<Button android:id="@+id/scan_bn" android:layout_height="wrap_content" android:layout_width="fill_parent" android:text="сканировать" />
+<!--Bottom -->
+<LinearLayout android:layout_height="wrap_content" android:layout_width="fill_parent" android:orientation="horizontal">
+    <Button android:id="@+id/scan_bn" android:layout_height="wrap_content" android:layout_width="0dp" android:layout_weight="1" android:text="поиск по Артикулу" />
+<Button android:id="@+id/scan_bn" android:layout_height="wrap_content" android:layout_width="0dp"  android:layout_weight="1" android:text="сканировать"  />
+</LinearLayout>
+<!--end Bottom -->
 </LinearLayout>
 

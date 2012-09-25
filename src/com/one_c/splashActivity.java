@@ -70,7 +70,7 @@ public class splashActivity extends Activity {
                     // Log.d("name1", name + "))") ;
 
                 };
-                con.startActivity(new Intent(con,scanedList.class));
+                con.startActivity(new Intent(con,select_store.class));
                 con.finish();
                // makeSpinnerData();
 //                dh.getAllStores();

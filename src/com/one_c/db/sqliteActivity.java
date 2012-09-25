@@ -22,8 +22,8 @@ public class sqliteActivity extends Activity {
        // dh.removeAllStores();
        // dh.insertToStore("karambae", "kokod");
       //  dh.getAllStores();
-        dh.insertToScaned("2000018987155","123","ботинки", "b-777","Ботинки адидас",1,1);
-        Cursor c=dh.getAllScaned();
+        dh.insertToScaned("2000018987155","123","ботинки", "b-777","Ботинки адидас",1,"","unit");
+        Cursor c=dh.getAllScaned("");
         for(int i=0; i<c.getCount();i++){
             c.moveToPosition(i);
             Log.d("scaned",c.getString(1));

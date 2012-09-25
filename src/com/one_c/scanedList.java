@@ -9,11 +9,11 @@ import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.*;
-import android.widget.*;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 import com.one_c.db.DatabaseHelper;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.one_c.lib.fileLib;
 
 public class scanedList extends Activity
 {
@@ -38,7 +38,9 @@ Activity con;
 
 
 
-        makeSpinnerData();
+//        makeSpinnerData();
+
+        setStore();     // init    id_store
         mkList();
        // new articleRequest(con,"2000002026013") ;
     }
@@ -61,7 +63,7 @@ Activity con;
         }
         return true;
     }
-
+   /*
     public void   makeSpinnerData(){
     List<String> listStore = new ArrayList<String>();
     DatabaseHelper dh=new DatabaseHelper(con);
@@ -80,6 +82,7 @@ Activity con;
     cur.close();
 
 }
+    */
     
 private void mkList(){
     final DatabaseHelper DBhelper=new DatabaseHelper(con);
@@ -87,7 +90,7 @@ private void mkList(){
     
     DatabaseHelper dh=new DatabaseHelper(this);
   //  dh.insertToScaned("2000018987155","123","ботинки", "b-777","Ботинки адидас",1);
-     Cursor c=dh.getAllScaned();
+     Cursor c=dh.getAllScaned(id_store);
 
 
     for(int i=0; i<c.getCount();i++){
@@ -96,11 +99,13 @@ private void mkList(){
        final String id=c.getString(0);
         
        final View v= getLayoutInflater().inflate(R.layout.scan_list_item, null);
+        ((TextView) v.findViewById(R.id.scan_list_id)).setText(""+(i+1)+". ");
+
         ((TextView) v.findViewById(R.id.scan_list_baracode)).setText(c.getString(1));
         final String name=c.getString(3);
         ((TextView) v.findViewById(R.id.scan_list_name)).setText(name);
 
-        ((TextView) v.findViewById(R.id.scan_list_count)).setText(c.getString(7)+"шт.");
+        ((TextView) v.findViewById(R.id.scan_list_count)).setText(c.getString(6)+"ед.");
 
        //remove item
        v.findViewById(R.id.remove_item).setOnClickListener(new View.OnClickListener() {
@@ -149,7 +154,30 @@ private void mkList(){
        list.addView(v);
     }
     c.close();
-}  
+}
+
+
+
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            startActivity(new Intent(this,select_store.class));
+            finish();
+        }
+        return super.onKeyDown(keyCode, event);
+    };
+
+
+    String id_store;
+    private void setStore(){
+        fileLib fl=new fileLib(con);
+        String storeName= fl.read("currentCode").split(";")[1];
+        ((TextView) findViewById(R.id.store_name)).setText("Склад: "+storeName);
+        id_store=fl.read("currentCode").split(";")[2];
+
+    }
 
 
 }
