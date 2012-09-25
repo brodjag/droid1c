@@ -1,6 +1,8 @@
 package com.one_c;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -75,8 +77,31 @@ public class splashActivity extends Activity {
                // makeSpinnerData();
 //                dh.getAllStores();
             }else {
+                showDailog();
                 Toast.makeText(con, "chek net (activity)", Toast.LENGTH_SHORT).show();}
         }
+    }
+
+
+    void showDailog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Ошибка доступа к серверу. ")
+                .setCancelable(false)
+                .setPositiveButton("настройки", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                        Toast.makeText(con,"показать настройки",Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton("Выход", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        con.finish();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+
     }
 
 }

@@ -33,19 +33,20 @@ public final class R {
         public static final int article_ok=0x7f060007;
         public static final int article_v_count=0x7f060006;
         public static final int cameraPreview=0x7f060008;
-        public static final int export=0x7f060016;
-        public static final int id_s=0x7f060014;
-        public static final int info=0x7f060017;
+        public static final int export=0x7f060017;
+        public static final int id_s=0x7f060015;
+        public static final int info=0x7f060018;
         public static final int list_skd=0x7f06000c;
-        public static final int remove_item=0x7f060012;
+        public static final int remove_item=0x7f060013;
         public static final int scanText=0x7f060009;
-        public static final int scan_bn=0x7f06000d;
-        public static final int scan_list_baracode=0x7f06000f;
-        public static final int scan_list_count=0x7f060010;
-        public static final int scan_list_id=0x7f06000e;
-        public static final int scan_list_name=0x7f060011;
-        public static final int setting=0x7f060015;
-        public static final int store_list=0x7f060013;
+        public static final int scan_bn=0x7f06000e;
+        public static final int scan_list_baracode=0x7f060010;
+        public static final int scan_list_count=0x7f060011;
+        public static final int scan_list_id=0x7f06000f;
+        public static final int scan_list_name=0x7f060012;
+        public static final int search_articul_bn=0x7f06000d;
+        public static final int setting=0x7f060016;
+        public static final int store_list=0x7f060014;
         public static final int store_name=0x7f06000b;
     }
     public static final class layout {

@@ -20,7 +20,7 @@
 
 <!--Bottom -->
 <LinearLayout android:layout_height="wrap_content" android:layout_width="fill_parent" android:orientation="horizontal">
-    <Button android:id="@+id/scan_bn" android:layout_height="wrap_content" android:layout_width="0dp" android:layout_weight="1" android:text="поиск по Артикулу" />
+    <Button android:id="@+id/search_articul_bn" android:layout_height="wrap_content" android:layout_width="0dp" android:layout_weight="1" android:text="поиск по Артикулу" />
 <Button android:id="@+id/scan_bn" android:layout_height="wrap_content" android:layout_width="0dp"  android:layout_weight="1" android:text="сканировать"  />
 </LinearLayout>
 <!--end Bottom -->
