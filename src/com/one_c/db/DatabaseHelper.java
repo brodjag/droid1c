@@ -33,9 +33,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         
         db.execSQL("CREATE TABLE scaned (id integer PRIMARY KEY,barcode text,kod text,name text,article text,FullName text,count integer,id_store text, unit text)");
 
+        db.execSQL("CREATE TABLE setting (id INTEGER PRIMARY KEY, name TEXT, value TEXT)");
+
+        db.execSQL("Insert into setting (name, value)  values('url_pre','http://fpat.ru/DemoEnterprise/ws/')");
+        db.execSQL("Insert into setting (name, value)  values('url_area','DroidC')");
+        db.execSQL("Insert into setting (name, value)  values('login','admin')");
+        db.execSQL("Insert into setting (name, value)  values('password','123')");
+        db.execSQL("Insert into setting (name, value)  values('flash','вкл.')");
+
+//      setSetting("url_pre","http://fpat.ru/DemoEnterprise/ws/");
+       // setSetting("url_area","1csoap");
+
+
         /*
-
-
         db.execSQL("CREATE TABLE "+deptTable+" ("+colDeptID+ " INTEGER PRIMARY KEY , "+
                 colDeptName+ " TEXT)");
 
@@ -70,15 +80,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // TODO Auto-generated method stub
         db.execSQL("DROP TABLE IF EXISTS "+"stores");
         db.execSQL("DROP TABLE IF EXISTS "+"scaned");
+        db.execSQL("DROP TABLE IF EXISTS "+"setting");
+
          /*
         db.execSQL("DROP TABLE IF EXISTS "+employeeTable);
         db.execSQL("DROP TABLE IF EXISTS "+deptTable);
-
         db.execSQL("DROP TRIGGER IF EXISTS dept_id_trigger");
         db.execSQL("DROP TRIGGER IF EXISTS dept_id_trigger22");
         db.execSQL("DROP TRIGGER IF EXISTS fk_empdept_deptid");
         db.execSQL("DROP VIEW IF EXISTS "+viewEmps);
-
         */
         onCreate(db);
     }
@@ -185,7 +195,7 @@ public Cursor getAllScaned(String id_store)
       // String s= String.format("SELECT * from scaned where barcode='"+barcode+"' ",new String [] {});
       //  Log.d("selectBare", s);
 
-              cur= db.rawQuery("SELECT * from scaned where barcode='"+barcode+"' and id_store=?",new String [] {id_store});
+        cur= db.rawQuery("SELECT * from scaned where barcode='"+barcode+"' and id_store=?",new String [] {id_store});
         cur.moveToFirst();
         int res=-1;
         if(cur.getCount()>0){res=cur.getInt(0); }
@@ -193,5 +203,57 @@ public Cursor getAllScaned(String id_store)
          cur.close();
         return res;
     }
+
+//********************************
+//setting values
+//********************************
+public String getSetting(String value){
+    SQLiteDatabase db=this.getReadableDatabase();
+    Cursor cur;
+    cur= db.rawQuery("SELECT * from setting where name=\""+value+"\"",new String [] {});
+    cur.moveToFirst();
+    String res="";
+    if (cur.getCount()>0){ res=cur.getString(2);  }
+    cur.close();
+    db.close();
+    return res;
+}
+
+    public double newSetting(String name,String value){
+        SQLiteDatabase db=this.getWritableDatabase();
+        ContentValues cv=new ContentValues();
+        cv.put("name" ,name);
+        cv.put("value" ,value);
+        long  res=db.insert("setting",null,cv);
+        db.close();
+        return res;
+    }
+
+    private void settingUpdate(String name, String value){
+        SQLiteDatabase db=this.getWritableDatabase();
+        ContentValues args = new ContentValues();
+        args.put("value", value);
+        db.update("setting",args,"name=?",new String[]{name});
+        db.close();
+    }
+
+    private double getSettingCount(String name){
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cur;
+        cur= db.rawQuery("SELECT * from setting where name='"+name+"'",new String [] {});
+        double res=cur.getCount();
+        cur.close();
+        db.close();
+        return res;
+    }
+
+    public void setSetting(String name, String value){
+     if (getSettingCount(name)==0){
+         newSetting(name,value);
+     } else {
+         settingUpdate(name,value);
+     }
+    }
+
 
 }

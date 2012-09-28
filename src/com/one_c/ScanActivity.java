@@ -62,9 +62,6 @@ public class ScanActivity extends Activity
         BroadcastReceiver mReceiver = new ScreenReceiver();
         registerReceiver(mReceiver, filter);
 
-
-         /// Toast.makeText(this,"",Toast.LENGTH_SHORT).show();
-        //
         setContentView(R.layout.scan);
 
 
@@ -103,6 +100,11 @@ public class ScanActivity extends Activity
             barcodeScanned = false;
             scanText.setText("Scanning...");
             mCamera.setPreviewCallback(previewCb);
+            //flash on
+            Camera.Parameters p = mCamera.getParameters();
+            p.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+            mCamera.setParameters(p);
+            //end flash on
             mCamera.startPreview();
             previewing = true;
             mCamera.autoFocus(autoFocusCB);
@@ -170,6 +172,11 @@ public class ScanActivity extends Activity
                 if (result != 0) {
                     previewing = false;
                     mCamera.setPreviewCallback(null);
+                    //stop flash
+                    Camera.Parameters p = camera.getParameters();
+                    p.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+                    mCamera.setParameters(p);
+                    //end stop flash
                     mCamera.stopPreview();
                     
                     SymbolSet syms = scanner.getResults();
@@ -199,8 +206,24 @@ public class ScanActivity extends Activity
         };
 
     private void onScaned(String barecode) {
+        /*
+        int nechet=0;
+        for (int i=0;i<barecode.length()-2; i=i+2){
+            Log.d("summ=","nechet="+barecode.charAt(i));
+            nechet=nechet+Integer.parseInt(""+barecode.charAt(i));
+        }
+        int chet=0;
+        for (int i=1;i<barecode.length(); i=i+2){
+            Log.d("summ=","chet="+barecode.charAt(i));
+            chet=chet+Integer.parseInt(""+barecode.charAt(i));
+        }
 
-
+        int summ=nechet+chet*3;
+       // Log.d("summ=",""+summ);
+        int chekSumm=(int) Math.ceil((double) summ/10)*10-summ;
+        Log.d("summ=","chekSumm="+chekSumm);
+        Log.d("summ=","chekSummReaded="+barecode.charAt(barecode.length()-1));
+        */
         new articleRequest(con,barecode) ;
 
     }
@@ -264,4 +287,21 @@ public void onWindowFocusChanged(boolean b){
         }
         return super.onKeyDown(keyCode, event);
     };
+
+void cameraOn(){
+ Camera   camera = Camera.open();
+    Camera.Parameters p = camera.getParameters();
+    p.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+    camera.setParameters(p);
+    camera.startPreview();
+
+}
+    void cameraOff(){
+        Camera  camera = Camera.open();
+        Camera.Parameters p = camera.getParameters();
+        p.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+        camera.setParameters(p);
+        camera.stopPreview();
+
+    }
 }

@@ -105,7 +105,7 @@ private void mkList(){
         final String name=c.getString(3);
         ((TextView) v.findViewById(R.id.scan_list_name)).setText(name);
 
-        ((TextView) v.findViewById(R.id.scan_list_count)).setText(c.getString(6)+"ед.");
+        ((TextView) v.findViewById(R.id.scan_list_count)).setText(c.getString(6)+" ед.");
 
        //remove item
        v.findViewById(R.id.remove_item).setOnClickListener(new View.OnClickListener() {

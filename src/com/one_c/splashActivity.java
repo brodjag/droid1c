@@ -85,12 +85,16 @@ public class splashActivity extends Activity {
 
     void showDailog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
         builder.setMessage("Ошибка доступа к серверу. ")
                 .setCancelable(false)
+                .setTitle("Droid-C")
                 .setPositiveButton("настройки", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
-                        Toast.makeText(con,"показать настройки",Toast.LENGTH_SHORT).show();
+                        con.startActivity(new Intent(con, settingActivity.class));
+                        con.finish();
+                      //  Toast.makeText(con,"показать настройки",Toast.LENGTH_SHORT).show();
                     }
                 })
                 .setNegativeButton("Выход", new DialogInterface.OnClickListener() {

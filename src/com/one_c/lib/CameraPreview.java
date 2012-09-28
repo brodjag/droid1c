@@ -85,6 +85,11 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         try {
             // Hard code camera surface rotation 90 degs to match Activity view in portrait
             mCamera.setDisplayOrientation(90);
+            //flash on
+            Camera.Parameters p = mCamera.getParameters();
+            p.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+            mCamera.setParameters(p);
+            //end flash on
 
             mCamera.setPreviewDisplay(mHolder);
             mCamera.setPreviewCallback(previewCallback);

@@ -2,12 +2,15 @@ package com.one_c;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.one_c.db.DatabaseHelper;
 
 /**
@@ -78,9 +81,14 @@ public class articleEdit extends Activity {
                 if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN) &&  (i == KeyEvent.KEYCODE_ENTER)) {
                     nextView();
                 }
-                return false;  //To change body of implemented methods use File | Settings | File Templates.
+        return false;  //To change body of implemented methods use File | Settings | File Templates.
             }
         });
+
+
+
+
+
 
 
 
@@ -110,5 +118,16 @@ public class articleEdit extends Activity {
         }
         return super.onKeyDown(keyCode, event);
     };
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        Toast.makeText(con,"dddd",Toast.LENGTH_SHORT).show();
+        Log.d("hide","hiddien!") ;
+    }
+
+
+
+
 
 }

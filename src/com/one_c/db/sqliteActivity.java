@@ -1,7 +1,6 @@
 package com.one_c.db;
 
 import android.app.Activity;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -18,16 +17,9 @@ public class sqliteActivity extends Activity {
         super.onCreate(savedInstanceState);
         Toast.makeText(this,"db!",Toast.LENGTH_SHORT).show();
        DatabaseHelper dh=new DatabaseHelper(this);
+       dh.setSetting("qq","b-qq");
 
-       // dh.removeAllStores();
-       // dh.insertToStore("karambae", "kokod");
-      //  dh.getAllStores();
-        dh.insertToScaned("2000018987155","123","ботинки", "b-777","Ботинки адидас",1,"","unit");
-        Cursor c=dh.getAllScaned("");
-        for(int i=0; i<c.getCount();i++){
-            c.moveToPosition(i);
-            Log.d("scaned",c.getString(1));
-        }
+        Log.d("setting",   dh.getSetting("qqq")) ;
         
     }
 }

@@ -5,6 +5,13 @@
               android:layout_height="fill_parent">
 
 <LinearLayout android:orientation="vertical" android:layout_height="fill_parent" android:layout_width="fill_parent" >
+    <!--head -->
+    <LinearLayout android:background="#aaa" android:orientation="horizontal" android:layout_height="50dp" android:layout_width="fill_parent" android:layout_marginBottom="10dp">
+        <TextView android:textColor="#000" android:gravity="center" android:textSize="18dp" android:textStyle="bold"
+                  android:layout_height="fill_parent" android:layout_width="fill_parent" android:text="Описание продукта" />
+    </LinearLayout>
+    <!-- end head -->
+
     <!--название полное -->
     <LinearLayout android:orientation="horizontal" android:layout_height="wrap_content" android:layout_width="fill_parent">
         <TextView android:visibility="gone"   android:text="название полное: " android:gravity="right" android:layout_height="wrap_content" android:layout_width="1dp" android:layout_weight="1"/>
