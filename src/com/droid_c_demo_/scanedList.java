@@ -1,4 +1,4 @@
-package com.one_c;
+package com.droid_c_demo_;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -12,8 +12,8 @@ import android.view.*;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.one_c.db.DatabaseHelper;
-import com.one_c.lib.fileLib;
+import com.droid_c_demo_.db.DatabaseHelper;
+import com.droid_c_demo_.lib.fileLib;
 
 public class scanedList extends Activity
 {
@@ -24,15 +24,24 @@ Activity con;
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(com.one_c.R.layout.scan_list);
+        setContentView(com.droid_c_demo_.R.layout.scan_list);
         con=this;
         
      ( findViewById(R.id.scan_bn)).setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View view) {
+             try { ((Vibrator) con.getSystemService(con.VIBRATOR_SERVICE)).vibrate(50);} catch (Exception e) {} ;
          //   new articleRequest(con,"");
              startActivity(new Intent(con, ScanActivity.class));
              finish();
+         }
+     });
+
+     findViewById(R.id.search_articul_bn).setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View view) {
+             try { ((Vibrator) con.getSystemService(con.VIBRATOR_SERVICE)).vibrate(50);} catch (Exception e) {} ;
+             Toast.makeText(con, "Поиск по артиклу в разработке", Toast.LENGTH_SHORT).show();
          }
      });
 
@@ -51,15 +60,22 @@ Activity con;
         inflater.inflate(R.menu.menu, menu);
         return true;
     }
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Intent setting= new Intent(con,settingActivity.class);
+        setting.putExtra("back",settingActivity.backToScanList);
+
         switch (item.getItemId()) {
-            case R.id.setting:     Toast.makeText(this, "You pressed the setting!", Toast.LENGTH_LONG).show();
+             case R.id.setting:
+                    con.startActivity(setting);
+                    con.finish();
                 break;
-            case R.id.export:     Toast.makeText(this, "You pressed the expor!", Toast.LENGTH_LONG).show();
+            case R.id.export:     Toast.makeText(this, "Функция выгрузки в процессе разработки", Toast.LENGTH_LONG).show();
                 break;
-            case R.id.info: Toast.makeText(this, "You pressed the icon and info!", Toast.LENGTH_LONG).show();
-                break;
+           // case R.id.info: Toast.makeText(this, "You pressed the icon and info!", Toast.LENGTH_LONG).show();
+            //    break;
         }
         return true;
     }
@@ -111,9 +127,7 @@ private void mkList(){
        v.findViewById(R.id.remove_item).setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
-               try {
-                   ((Vibrator) con.getSystemService(con.VIBRATOR_SERVICE)).vibrate(50);
-               } catch (Exception e) {} ;
+               try { ((Vibrator) con.getSystemService(con.VIBRATOR_SERVICE)).vibrate(50);} catch (Exception e) {} ;
              //  Toast.makeText(con, "удалить ))" + id, Toast.LENGTH_SHORT).show();
 
                final AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(con);
@@ -181,3 +195,7 @@ private void mkList(){
 
 
 }
+
+
+
+

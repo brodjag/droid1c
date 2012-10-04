@@ -3,7 +3,7 @@
  * 
  * Created by lisah0 on 2012-02-24
  */
-package com.one_c.lib;
+package com.droid_c_demo_.lib;
 
 import android.content.Context;
 import android.hardware.Camera;
@@ -12,6 +12,7 @@ import android.hardware.Camera.PreviewCallback;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import com.droid_c_demo_.db.DatabaseHelper;
 
 /** A basic Camera preview class */
 public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
@@ -19,11 +20,13 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
     private Camera mCamera;
     private PreviewCallback previewCallback;
     private AutoFocusCallback autoFocusCallback;
+    public Context con;
 
     public CameraPreview(Context context, Camera camera,
                          PreviewCallback previewCb,
                          AutoFocusCallback autoFocusCb) {
         super(context);
+        con=context;
         mCamera = camera;
         previewCallback = previewCb;
         autoFocusCallback = autoFocusCb;
@@ -86,9 +89,13 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
             // Hard code camera surface rotation 90 degs to match Activity view in portrait
             mCamera.setDisplayOrientation(90);
             //flash on
-            Camera.Parameters p = mCamera.getParameters();
-            p.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
-            mCamera.setParameters(p);
+            DatabaseHelper dh=new DatabaseHelper(con);
+            String flashSwitcher= dh.getSetting("flash");
+            if(flashSwitcher.equals("вкл.")){
+                Camera.Parameters p = mCamera.getParameters();
+                p.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+                mCamera.setParameters(p);
+            }
             //end flash on
 
             mCamera.setPreviewDisplay(mHolder);

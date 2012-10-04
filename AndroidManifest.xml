@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="com.one_c"
+      package="com.droid_c_demo_"
       android:versionCode="1"
-      android:versionName="1.0">
+      android:versionName="1.0.0 demo">
 
 
     <uses-sdk android:minSdkVersion="8" />
@@ -47,7 +47,8 @@
         </activity>
         <activity android:name=".select_store" android:screenOrientation="portrait"/>
 
-        <activity android:name=".settingActivity">
+
+        <activity android:name=".settingActivity"  android:configChanges="keyboardHidden|orientation">
 
 
         </activity>

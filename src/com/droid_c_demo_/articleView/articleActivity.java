@@ -1,18 +1,19 @@
-package com.one_c.articleView;
+package com.droid_c_demo_.articleView;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.one_c.R;
-import com.one_c.db.DatabaseHelper;
-import com.one_c.lib.fileLib;
-import com.one_c.lib.saveFile;
-import com.one_c.scanedList;
+import com.droid_c_demo_.R;
+import com.droid_c_demo_.db.DatabaseHelper;
+import com.droid_c_demo_.lib.fileLib;
+import com.droid_c_demo_.lib.saveFile;
+import com.droid_c_demo_.scanedList;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
@@ -43,24 +44,25 @@ public class articleActivity extends Activity {
         NodeList bcodeLt= Return.getElementsByTagName("m:Barcode");
         Toast.makeText(this, bcodeLt.item(0).getFirstChild().getNodeValue(), Toast.LENGTH_SHORT).show();
        //bara code
-         brCode=Return.getElementsByTagName("m:Barcode").item(0).getFirstChild().getNodeValue();
+
+        try{ brCode=Return.getElementsByTagName("m:Barcode").item(0).getFirstChild().getNodeValue(); }catch (Exception e){}
         ((TextView) findViewById(R.id.articel_bcode)).setText(brCode);
         //code 1c
-         code_1C=Return.getElementsByTagName("m:Kod").item(0).getFirstChild().getNodeValue();
+        try{ code_1C=Return.getElementsByTagName("m:Kod").item(0).getFirstChild().getNodeValue(); }catch (Exception e){}
         ((TextView) findViewById(R.id.articel_1c_code)).setText(code_1C);
         //name
-        name=Return.getElementsByTagName("m:Name").item(0).getFirstChild().getNodeValue();
+       try{ name=Return.getElementsByTagName("m:Name").item(0).getFirstChild().getNodeValue();}catch (Exception e){}
         ((TextView) findViewById(R.id.articel_name)).setText(name);
 
         //article id
-         article= Return.getElementsByTagName("m:Article").item(0).getFirstChild().getNodeValue();
+        try{ article= Return.getElementsByTagName("m:Article").item(0).getFirstChild().getNodeValue(); }catch (Exception e){}
         ((TextView) findViewById(R.id.articel_art_id)).setText(article);
         //name full
-         fullName=Return.getElementsByTagName("m:FullName").item(0).getFirstChild().getNodeValue();
+        try{ fullName=Return.getElementsByTagName("m:FullName").item(0).getFirstChild().getNodeValue(); }catch (Exception e){}
         ((TextView) findViewById(R.id.articel_name_full)).setText(fullName);
 
         //unit
-        unit=Return.getElementsByTagName("m:Unit").item(0).getFirstChild().getNodeValue();
+       try{ unit=Return.getElementsByTagName("m:Unit").item(0).getFirstChild().getNodeValue(); }catch (Exception e){}
         ((TextView) findViewById(R.id.articel_unit)).setText(unit);
 
         findViewById(R.id.article_ok).setOnClickListener(new View.OnClickListener() {
@@ -81,6 +83,7 @@ public class articleActivity extends Activity {
 
     }
 private void nextView(){
+    try { ((Vibrator) con.getSystemService(con.VIBRATOR_SERVICE)).vibrate(50);} catch (Exception e) {} ;
     int count;
     try{
         count=Integer.parseInt(((EditText) con.findViewById(R.id.article_v_count)).getText().toString());
@@ -105,11 +108,11 @@ private void nextView(){
     con.finish();
 }
 
-     String brCode;
-     String code_1C;
-     String name;
-     String article;
-     String fullName;
-    String unit;
+     String brCode="";
+     String code_1C="";
+     String name="";
+     String article="";
+     String fullName="";
+    String unit="";
 
 }

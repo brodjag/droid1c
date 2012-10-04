@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.one_c;
+package com.droid_c_demo_;
 
 public final class R {
     public static final class attr {
@@ -20,7 +20,10 @@ public final class R {
         public static final int q=0x7f020006;
         public static final int qq=0x7f020007;
         public static final int scan_plus=0x7f020008;
-        public static final int target=0x7f020009;
+        public static final int setting1=0x7f020009;
+        public static final int setting_ico=0x7f02000a;
+        public static final int target=0x7f02000b;
+        public static final int upload=0x7f02000c;
     }
     public static final class id {
         public static final int ScanButton=0x7f07000a;
@@ -33,16 +36,17 @@ public final class R {
         public static final int article_ok=0x7f070007;
         public static final int article_v_count=0x7f070006;
         public static final int cameraPreview=0x7f070008;
-        public static final int d_login=0x7f070019;
-        public static final int d_password=0x7f07001a;
-        public static final int dialog_enter=0x7f070018;
-        public static final int export=0x7f070022;
-        public static final int flash=0x7f070020;
+        public static final int d_login=0x7f07001a;
+        public static final int d_password=0x7f07001b;
+        public static final int dialog_cancel_auth=0x7f07001c;
+        public static final int dialog_enter=0x7f070019;
+        public static final int dialog_server_cancel=0x7f070018;
+        public static final int export=0x7f070024;
+        public static final int flash=0x7f070022;
         public static final int id_s=0x7f070015;
-        public static final int info=0x7f070023;
         public static final int list_skd=0x7f07000c;
-        public static final int login=0x7f07001d;
-        public static final int password=0x7f07001e;
+        public static final int login=0x7f07001f;
+        public static final int password=0x7f070020;
         public static final int remove_item=0x7f070013;
         public static final int scanText=0x7f070009;
         public static final int scan_bn=0x7f07000e;
@@ -51,10 +55,10 @@ public final class R {
         public static final int scan_list_id=0x7f07000f;
         public static final int scan_list_name=0x7f070012;
         public static final int search_articul_bn=0x7f07000d;
-        public static final int setting=0x7f070021;
-        public static final int setting_authofication=0x7f07001c;
-        public static final int setting_flash=0x7f07001f;
-        public static final int setting_server_item=0x7f07001b;
+        public static final int setting=0x7f070023;
+        public static final int setting_authofication=0x7f07001e;
+        public static final int setting_flash=0x7f070021;
+        public static final int setting_server_item=0x7f07001d;
         public static final int store_list=0x7f070014;
         public static final int store_name=0x7f07000b;
         public static final int url_area=0x7f070017;

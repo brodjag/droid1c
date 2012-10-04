@@ -1,10 +1,11 @@
-package com.one_c.db;
+package com.droid_c_demo_.db;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /**
  * Created by IntelliJ IDEA.
@@ -16,7 +17,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     static final String dbName="tempDB";
-    static final int version=1;
+    static final int version=2;
     static final String storeDb="stores";
 
 
@@ -35,11 +36,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.execSQL("CREATE TABLE setting (id INTEGER PRIMARY KEY, name TEXT, value TEXT)");
 
-        db.execSQL("Insert into setting (name, value)  values('url_pre','http://fpat.ru/DemoEnterprise/ws/')");
+        db.execSQL("Insert into setting (name, value)  values('url_pre','http://fpat.ru/DemoEnterprise')");
         db.execSQL("Insert into setting (name, value)  values('url_area','DroidC')");
         db.execSQL("Insert into setting (name, value)  values('login','admin')");
         db.execSQL("Insert into setting (name, value)  values('password','123')");
-        db.execSQL("Insert into setting (name, value)  values('flash','вкл.')");
+        db.execSQL("Insert into setting (name, value)  values('flash','выкл.')");
 
 //      setSetting("url_pre","http://fpat.ru/DemoEnterprise/ws/");
        // setSetting("url_area","1csoap");
@@ -233,7 +234,7 @@ public String getSetting(String value){
         SQLiteDatabase db=this.getWritableDatabase();
         ContentValues args = new ContentValues();
         args.put("value", value);
-        db.update("setting",args,"name=?",new String[]{name});
+        db.update("setting", args, "name=?", new String[]{name});
         db.close();
     }
 
@@ -255,5 +256,12 @@ public String getSetting(String value){
      }
     }
 
+   public String getURL(){
+    String res="";
+       Log.d("url_",res);
+   res= getSetting("url_pre")+"/ws/"+getSetting("url_area")+".1cws";
+       Log.d("url_",res);
+   return  res;
+   }
 
 }

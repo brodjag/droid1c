@@ -4,7 +4,7 @@
  * 
  * Created by lisah0 on 2012-02-24
  */
-package com.one_c;
+package com.droid_c_demo_;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -19,14 +19,15 @@ import android.hardware.Camera.Size;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
-import android.view.KeyEvent;
-import android.view.View;
+import android.view.*;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-import com.one_c.articleView.articleRequest;
-import com.one_c.lib.CameraPreview;
+import android.widget.Toast;
+import com.droid_c_demo_.articleView.articleRequest;
+import com.droid_c_demo_.db.DatabaseHelper;
+import com.droid_c_demo_.lib.CameraPreview;
 import net.sourceforge.zbar.*;
 
 /* Import ZBar Class files */
@@ -101,9 +102,13 @@ public class ScanActivity extends Activity
             scanText.setText("Scanning...");
             mCamera.setPreviewCallback(previewCb);
             //flash on
+            DatabaseHelper dh=new DatabaseHelper(con);
+            String flashSwitcher= dh.getSetting("flash");
+            if(flashSwitcher.equals("вкл.")){
             Camera.Parameters p = mCamera.getParameters();
             p.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
             mCamera.setParameters(p);
+            }
             //end flash on
             mCamera.startPreview();
             previewing = true;
@@ -173,9 +178,13 @@ public class ScanActivity extends Activity
                     previewing = false;
                     mCamera.setPreviewCallback(null);
                     //stop flash
-                    Camera.Parameters p = camera.getParameters();
-                    p.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
-                    mCamera.setParameters(p);
+                    DatabaseHelper dh=new DatabaseHelper(con);
+                    String flashSwitcher= dh.getSetting("flash");
+                    if(flashSwitcher.equals("вкл.")){
+                        Camera.Parameters p = camera.getParameters();
+                         p.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+                        try{ mCamera.setParameters(p);}catch (Exception e){}
+                    }
                     //end stop flash
                     mCamera.stopPreview();
                     
@@ -224,6 +233,7 @@ public class ScanActivity extends Activity
         Log.d("summ=","chekSumm="+chekSumm);
         Log.d("summ=","chekSummReaded="+barecode.charAt(barecode.length()-1));
         */
+        try { ((Vibrator) con.getSystemService(con.VIBRATOR_SERVICE)).vibrate(100);} catch (Exception e) {} ;
         new articleRequest(con,barecode) ;
 
     }
@@ -303,5 +313,31 @@ void cameraOn(){
         camera.setParameters(p);
         camera.stopPreview();
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent setting= new Intent(con,settingActivity.class);
+        setting.putExtra("back",settingActivity.backToScan);
+
+        switch (item.getItemId()) {
+            case R.id.setting:
+                con.startActivity(setting);
+                con.finish();
+                break;
+            case R.id.export:     Toast.makeText(this, "Функция выгрузки в процессе разработки", Toast.LENGTH_LONG).show();
+                break;
+            // case R.id.info: Toast.makeText(this, "You pressed the icon and info!", Toast.LENGTH_LONG).show();
+            //    break;
+        }
+        return true;
     }
 }

@@ -1,4 +1,4 @@
-package com.one_c.lib;
+package com.droid_c_demo_.lib;
 
 import android.util.Base64;
 import android.util.Log;
@@ -31,14 +31,18 @@ import java.io.StringReader;
  */
 public class soap {
 public String text=null;
+private String logPass="admin:123";
 
 
 public soap(){}
+public soap(String login, String password){
+   logPass=login+":"+password;
+}
 
 
 public   Element call(String url, String soapAction,  String envelope)  {
         final DefaultHttpClient httpClient=new DefaultHttpClient();
-
+         Log.d("url_soap",url);
         // параметры запроса
         HttpParams params = httpClient.getParams();
         HttpConnectionParams.setConnectionTimeout(params, 10000);
@@ -52,7 +56,7 @@ public   Element call(String url, String soapAction,  String envelope)  {
         httppost.setHeader("soapaction", soapAction);
         httppost.setHeader("Content-Type", "text/xml; charset=utf-8");
         //athorisation
-        String pass64= new String(Base64.encode("admin:123".getBytes(), Base64.NO_WRAP));
+        String pass64= new String(Base64.encode(logPass.getBytes(), Base64.NO_WRAP));
         Log.d("pass64", pass64);        //YWRtaW46MTIz
         httppost.setHeader("Authorization", ("Basic "+pass64));
 

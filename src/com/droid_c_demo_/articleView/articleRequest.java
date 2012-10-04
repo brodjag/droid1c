@@ -1,14 +1,14 @@
-package com.one_c.articleView;
+package com.droid_c_demo_.articleView;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.widget.Toast;
-import com.one_c.articleEdit;
-import com.one_c.db.DatabaseHelper;
-import com.one_c.lib.fileLib;
-import com.one_c.lib.soap;
+import com.droid_c_demo_.articleEdit;
+import com.droid_c_demo_.db.DatabaseHelper;
+import com.droid_c_demo_.lib.fileLib;
+import com.droid_c_demo_.lib.soap;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
@@ -22,12 +22,16 @@ import org.w3c.dom.NodeList;
 public class articleRequest {
     public Activity con;
     private String idBare;
-    
+    String  login;
+    String password;
     public articleRequest(Activity c, String brId){
         con=c;        idBare=brId;
       //  Toast.makeText(con,brId,Toast.LENGTH_SHORT).show();
 
         DatabaseHelper dh=new DatabaseHelper(con);
+
+        login=dh.getSetting("login");
+        password=dh.getSetting("password");
         // String barecode=sym.getData().toString();
         fileLib fl=new fileLib(con);
         String id_store=fl.read("currentCode").split(";")[2];
@@ -40,12 +44,16 @@ public class articleRequest {
             con.finish();
             return;
            // finish();
-        } else { new artTask().execute();}
+        } else {
+           // DatabaseHelper dh=new DatabaseHelper(con);
+            url=dh.getURL();
+            new artTask().execute();
+        }
 
 
 
     }
-
+   String url;
 
 
  private class artTask extends AsyncTask<Void,Void,Element> {
@@ -55,17 +63,20 @@ public class articleRequest {
     protected Element doInBackground(Void... voids) {
             String envelope="<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
                     "    <soap:Body>\n" +
-                    "        <FindProduct xmlns=\"http://fpat.ru\">\n" +
+                    "        <FindProduct xmlns=\"http://Droid-C.ru\">\n" +
                     "            <Barcode>"+idBare+"</Barcode>\n" +
-                    "            <SearchCode>true</SearchCode>\n" +
-                    "            <SearchArticle>false</SearchArticle>\n" +
+                    "            <SearchCode>1</SearchCode>\n" +
+                    "            <SearchArticle>1</SearchArticle>\n" +
                     "        </FindProduct>\n" +
                     "    </soap:Body>\n" +
                     "</soap:Envelope>";
 
 
-             sp=new soap();
-            Element body= sp.call("http://fpat.ru/DemoEnterprise/ws/1csoap.1cws","http://fpat.ru#WebStorageService:FindProduct",envelope);
+             sp=new soap(login,password);
+            //"http://fpat.ru/DemoEnterprise/ws/1csoap.1cws"
+
+
+            Element body= sp.call(url,"http://Droid-C.ru#WebStorageService:FindProduct",envelope);
             return body;
         }
         soap sp;
@@ -94,8 +105,6 @@ public class articleRequest {
            // return false;
             // Toast.makeText(con,"продукт не найден",Toast.LENGTH_SHORT).show();
         }
-
-
 
         waitDialog.dismiss();
     }

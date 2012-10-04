@@ -1,12 +1,14 @@
-package com.one_c;
+package com.droid_c_demo_;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
-import com.one_c.db.DatabaseHelper;
+import com.droid_c_demo_.db.DatabaseHelper;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,10 +19,17 @@ import com.one_c.db.DatabaseHelper;
  */
 public class settingActivity extends Activity {
     private Activity con;
+    private boolean restart=false;
+
+
+    private int back=0;
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         con=this;
         setContentView(R.layout.settingsv);
+
+        back=getIntent().getIntExtra("back",0);
         setValues();
 
         findViewById(R.id.setting_server_item).setOnClickListener(new View.OnClickListener() {
@@ -67,7 +76,8 @@ public class settingActivity extends Activity {
                 DatabaseHelper dh=new DatabaseHelper(con);
                 dh.setSetting("url_pre", ((TextView) dialog.findViewById(R.id.url_pre)).getText().toString());
                 dh.setSetting("url_area", ((TextView) dialog.findViewById(R.id.url_area)).getText().toString());
-
+                restart=true;
+                dh.removeAllScaned();
                 setValues();
                 dialog.dismiss();
             }
@@ -76,7 +86,14 @@ public class settingActivity extends Activity {
         DatabaseHelper dh=new DatabaseHelper(con);
         ((TextView) dialog.findViewById(R.id.url_pre)).setText(dh.getSetting("url_pre"));
         ((TextView) dialog.findViewById(R.id.url_area)).setText(dh.getSetting("url_area"));
-
+        dialog.findViewById(R.id.dialog_server_cancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {  ((Vibrator) con.getSystemService(con.VIBRATOR_SERVICE)).vibrate(50); } catch (Exception e) { };
+                // dialog.cancel();
+                dialog.dismiss();
+            }
+        });
 
 
       dialog.show();
@@ -94,8 +111,16 @@ public class settingActivity extends Activity {
 
                 dh.setSetting("login", ((TextView) dialog.findViewById(R.id.d_login)).getText().toString());
                 dh.setSetting("password", ((TextView) dialog.findViewById(R.id.d_password)).getText().toString());
-
+                restart=true;
                 setValues();
+                dialog.dismiss();
+            }
+        });
+
+        dialog.findViewById(R.id.dialog_cancel_auth).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {  ((Vibrator) con.getSystemService(con.VIBRATOR_SERVICE)).vibrate(50); } catch (Exception e) { }
                 dialog.dismiss();
             }
         });
@@ -103,9 +128,6 @@ public class settingActivity extends Activity {
         DatabaseHelper dh=new DatabaseHelper(con);
         ((TextView) dialog.findViewById(R.id.d_login)).setText(dh.getSetting("login"));
         ((TextView) dialog.findViewById(R.id.d_password)).setText(dh.getSetting("password"));
-
-
-
         dialog.show();
     }
 
@@ -116,6 +138,31 @@ public class settingActivity extends Activity {
         ((TextView) findViewById(R.id.login)).setText(dh.getSetting("login"));
         ((TextView) findViewById(R.id.password)).setText(dh.getSetting("password"));
         ((TextView) findViewById(R.id.flash)).setText(dh.getSetting("flash"));
-
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (restart){
+                startActivity(new Intent(this,splashActivity.class));
+                finish();
+            }else {myBackFunction();finish();}
+        }
+        return super.onKeyDown(keyCode, event);
+    };
+
+//переопределить при инициализации!!!
+public void myBackFunction(){
+    if (back==backToScanList){startActivity(new Intent(con, scanedList.class));}
+    if (back==backToSelectStore){startActivity(new Intent(con, select_store.class));}
+    if (back==backToScan){startActivity(new Intent(con, ScanActivity.class));}
+   // Toast.makeText(con,"переход на нужный экран",Toast.LENGTH_SHORT).show();
 }
+
+static int backToScanList=1;
+static int backToSelectStore=2;
+static int backToScan=3;
+}
+
+

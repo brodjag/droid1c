@@ -1,4 +1,4 @@
-package com.one_c.db;
+package com.droid_c_demo_.db;
 
 import android.app.Activity;
 import android.os.Bundle;

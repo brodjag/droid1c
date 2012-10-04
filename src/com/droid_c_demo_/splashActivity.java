@@ -1,4 +1,4 @@
-package com.one_c;
+package com.droid_c_demo_;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -7,8 +7,8 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.Toast;
-import com.one_c.db.DatabaseHelper;
-import com.one_c.lib.soap;
+import com.droid_c_demo_.db.DatabaseHelper;
+import com.droid_c_demo_.lib.soap;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
@@ -21,28 +21,35 @@ import org.w3c.dom.NodeList;
  */
 public class splashActivity extends Activity {
     Activity con;
-    
+    String login;
+    String password;
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         con=this;
         setContentView(R.layout.splash);
+        DatabaseHelper dh=new DatabaseHelper(con);
+        url=dh.getURL();
+        login=dh.getSetting("login");
+        password=dh.getSetting("password");
         new spinTask().execute(null);
     }
-
+    String url;
 
     private class spinTask extends AsyncTask<Void,Void,Element> {
         @Override
         protected Element doInBackground(Void... voids) {
-            String envelope="<soap:Envelope xmlns:soap=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:fpat=\"http://fpat.ru\">\n" +
+            String envelope="<soap:Envelope xmlns:soap=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:dro=\"http://Droid-C.ru\">\n" +
                     "   <soap:Header/>\n" +
                     "   <soap:Body>\n" +
-                    "      <fpat:GetStorages/>\n" +
+                    "      <dro:GetStorages/>\n" +
                     "   </soap:Body>\n" +
                     "</soap:Envelope>";
 
 
-            soap sp=new soap();
-            Element body= sp.call("http://fpat.ru/DemoEnterprise/ws/1csoap.1cws","http://fpat.ru#WebStorageService:GetStorages",envelope)  ;
+            soap sp=new soap(login,password);
+            //"http://fpat.ru/DemoEnterprise/ws/1csoap.1cws"
+            Element body= sp.call(url,"http://Droid-C.ru#WebStorageService:GetStorages",envelope)  ;
 
             return body;  //To change body of implemented methods use File | Settings | File Templates.
         }
@@ -89,17 +96,24 @@ public class splashActivity extends Activity {
         builder.setMessage("Ошибка доступа к серверу. ")
                 .setCancelable(false)
                 .setTitle("Droid-C")
-                .setPositiveButton("настройки", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Настройки", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                         con.startActivity(new Intent(con, settingActivity.class));
                         con.finish();
-                      //  Toast.makeText(con,"показать настройки",Toast.LENGTH_SHORT).show();
+                        //  Toast.makeText(con,"показать настройки",Toast.LENGTH_SHORT).show();
                     }
                 })
                 .setNegativeButton("Выход", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 
+                        con.finish();
+                    }
+                })
+                .setNeutralButton("Рестарт", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        con.startActivity(new Intent(con, splashActivity.class));
                         con.finish();
                     }
                 });

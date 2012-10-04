@@ -1,17 +1,18 @@
-package com.one_c;
+package com.droid_c_demo_;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.one_c.db.DatabaseHelper;
+import com.droid_c_demo_.db.DatabaseHelper;
 
 /**
  * Created by IntelliJ IDEA.
@@ -97,6 +98,7 @@ public class articleEdit extends Activity {
     }
 
     void nextView(){
+        try { ((Vibrator) con.getSystemService(con.VIBRATOR_SERVICE)).vibrate(50);} catch (Exception e) {} ;
         int count;
         try{
             count=Integer.parseInt (((EditText) con.findViewById(R.id.article_v_count)).getText().toString());

@@ -1,15 +1,19 @@
-package com.one_c;
+package com.droid_c_demo_;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import com.one_c.db.DatabaseHelper;
-import com.one_c.lib.fileLib;
+import android.widget.Toast;
+import com.droid_c_demo_.db.DatabaseHelper;
+import com.droid_c_demo_.lib.fileLib;
 
 /**
  * Created with IntelliJ IDEA.
@@ -62,5 +66,33 @@ public class select_store extends Activity {
 
         cur.close();
 
+    }
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent setting= new Intent(con,settingActivity.class);
+        setting.putExtra("back",settingActivity.backToSelectStore);
+
+        switch (item.getItemId()) {
+            case R.id.setting:
+                con.startActivity(setting);
+                con.finish();
+                break;
+            case R.id.export:     Toast.makeText(this, "Функция выгрузки в процессе разработки", Toast.LENGTH_LONG).show();
+                break;
+            // case R.id.info: Toast.makeText(this, "You pressed the icon and info!", Toast.LENGTH_LONG).show();
+            //    break;
+        }
+        return true;
     }
 }

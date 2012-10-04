@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="fill_parent"
+              android:layout_width="300dp"
               android:layout_height="fill_parent">
 
     <LinearLayout android:layout_height="wrap_content" android:layout_width="fill_parent" android:layout_marginRight="0dp"
-                  android:layout_marginBottom="5dp" android:layout_marginLeft="0dp" android:orientation="vertical" android:gravity="center">
+                  android:layout_marginBottom="3dp" android:layout_marginLeft="0dp" android:orientation="vertical" android:gravity="center">
 
-        <TextView android:layout_marginBottom="5dp" android:layout_marginLeft="0dp" android:layout_marginRight="0dp" android:textSize="16dp" android:layout_width="fill_parent" android:padding="10dp"
+        <TextView android:layout_marginBottom="5dp" android:layout_marginLeft="0dp" android:layout_marginRight="0dp" android:textSize="16dp" android:layout_width="fill_parent" android:padding="6dp"
                   android:layout_height="wrap_content" android:background="#ddd" android:textColor="#000"
                   android:text="Авторизация" android:gravity="center" android:textStyle="bold"/>
 
@@ -19,8 +19,12 @@
 
         <TextView android:layout_marginLeft="5dp" android:layout_marginTop="5dp" android:layout_width="fill_parent"
                   android:layout_height="wrap_content" android:text="пароль:"/>
-        <EditText android:id="@+id/d_password" android:inputType="textUri" android:text="" android:layout_margin="5dp" android:layout_height="wrap_content" android:hint="ввелите пространство имен" android:layout_width="fill_parent" />
+        <EditText android:id="@+id/d_password" android:password="true" android:inputType="textUri" android:text="" android:layout_margin="5dp" android:layout_height="wrap_content" android:hint="введите пароль" android:layout_width="fill_parent" />
 
-        <Button android:id="@+id/dialog_enter" android:layout_margin="10dp" android:padding="5dp" android:text=" Ввод "  android:layout_height="wrap_content" android:layout_width="fill_parent"/>
+        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+            <Button android:id="@+id/dialog_cancel_auth" android:layout_margin="10dp" android:padding="5dp" android:text=" Отмена "  android:layout_height="wrap_content" android:layout_weight="1" android:layout_width="fill_parent"/>
+            <Button android:id="@+id/dialog_enter" android:layout_margin="10dp" android:padding="5dp" android:text=" Ввод "  android:layout_height="wrap_content" android:layout_weight="1" android:layout_width="fill_parent"/>
+
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
