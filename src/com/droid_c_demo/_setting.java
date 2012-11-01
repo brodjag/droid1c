@@ -10,4 +10,5 @@ package com.droid_c_demo;
 public class _setting {
     public static boolean lite=true;
     public static int maxScanList=12;
+
 }
