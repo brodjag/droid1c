@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/setting" android:title="@string/setting" android:icon="@drawable/setting1"  />
-   <!-- <item android:id="@+id/export"  android:title="Выгрузка" android:icon="@drawable/upload" /> -->
-   <!-- <item android:id="@+id/info" android:title="Информация"/> -->
+    <item android:id="@+id/search_hand"  android:title="@string/manual_enter" android:icon="@drawable/hand_enter" />
+    <!-- <item android:id="@+id/info" android:title="Информация"/> -->
 </menu>

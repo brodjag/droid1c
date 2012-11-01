@@ -3,7 +3,7 @@
  * 
  * Created by lisah0 on 2012-02-24
  */
-package com.droid_c_demo_.lib;
+package com.droid_c_demo.lib;
 
 import android.content.Context;
 import android.hardware.Camera;
@@ -12,7 +12,7 @@ import android.hardware.Camera.PreviewCallback;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import com.droid_c_demo_.db.DatabaseHelper;
+import com.droid_c_demo.db.DatabaseHelper;
 
 /** A basic Camera preview class */
 public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {

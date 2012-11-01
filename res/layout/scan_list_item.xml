@@ -17,7 +17,7 @@
                           android:text="200шт." android:textSize="14dp" android:gravity="right" />
             </LinearLayout>
 
-            <TextView android:id="@+id/scan_list_name" android:layout_height="wrap_content" android:layout_width="fill_parent"
+            <TextView android:id="@+id/scan_list_name" android:maxLines="3" android:layout_height="wrap_content" android:layout_width="fill_parent"
                       android:text="Женские ботфорты коричневые" />
         </LinearLayout>
 

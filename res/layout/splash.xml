@@ -3,5 +3,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent">
-<TextView  android:layout_width="fill_parent" android:textSize="30dp" android:layout_height="fill_parent" android:gravity="center"  android:text="Droid-C (демо)" />
+<TextView android:id="@+id/title1"  android:layout_width="fill_parent" android:textSize="30dp" android:layout_height="fill_parent" android:gravity="center"  android:text="Droid-C" />
 </LinearLayout>

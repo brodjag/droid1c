@@ -6,19 +6,19 @@
     <!--head -->
     <LinearLayout android:background="#aaa" android:orientation="horizontal" android:layout_height="50dp" android:layout_width="fill_parent">
         <TextView  android:textColor="#000" android:gravity="center" android:textSize="18dp" android:textStyle="bold"
-                   android:layout_height="fill_parent" android:layout_width="fill_parent" android:text="Настройки" />
+                   android:layout_height="fill_parent" android:layout_width="fill_parent" android:text="@string/settings_title" />
     </LinearLayout>
     <!-- end head -->
 
-    <LinearLayout android:orientation="vertical" android:background="#fff" android:layout_height="wrap_content"  android:layout_width="fill_parent">
+    <LinearLayout android:orientation="vertical" android:background="#fff" android:layout_height="fill_parent"  android:layout_width="fill_parent">
 
 
         <!--item server -->
-        <LinearLayout android:visibility="visible" style="@style/setting_item_parent" android:id="@+id/setting_server_item" >
+        <LinearLayout android:visibility="visible" style="@style/setting_item_parent" android:id="@+id/setting_server_item"  >
 
-            <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal">
-                <TextView style="@style/setting_item_title" android:layout_weight="0" android:text="Сервер" android:lines="1" android:layout_width="wrap_content"  />
-                <TextView style="@style/setting_item_title" android:text="(Текущие списки будут удалены!)" android:textColor="#f00" android:textSize="13dp" android:textStyle="normal" android:layout_width="wrap_content"  />
+            <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="vertical">
+                <TextView style="@style/setting_item_title" android:layout_weight="0" android:text="@string/server" android:lines="1" android:layout_width="wrap_content"  />
+                <TextView style="@style/setting_item_title" android:text="@string/if_u_change_all_clean" android:textColor="#f00" android:textSize="13dp" android:textStyle="normal" android:layout_width="wrap_content"  />
             </LinearLayout>
 
 
@@ -29,7 +29,7 @@
                 </LinearLayout>
 
                 <LinearLayout android:layout_margin="0dp"  style="@style/setting_item_settings_item" >
-                    <TextView style="@style/setting_item_settings_name"  android:text="пространство имен: " android:paddingTop="0dp" />
+                    <TextView style="@style/setting_item_settings_name"  android:text="@string/name_area" android:paddingTop="0dp" />
                     <TextView android:id="@+id/url_area" style="@style/setting_item_settings_name" android:text="ku" android:paddingTop="0dp" /><!--1csoap -->
                 </LinearLayout>
 
@@ -40,19 +40,19 @@
         <!--item athorithation -->
         <LinearLayout android:visibility="visible" android:id="@+id/setting_authofication" style="@style/setting_item_parent" >
 
-            <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal">
-                 <TextView style="@style/setting_item_title" android:text="Авторизация" android:layout_weight="0" android:layout_height="wrap_content" android:layout_width="wrap_content" />
-                <TextView style="@style/setting_item_title" android:text="(Необходим перезапуск!)" android:textColor="#0f0" android:textSize="13dp" android:textStyle="normal" android:layout_width="wrap_content"  />
+            <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="vertical">
+                 <TextView style="@style/setting_item_title" android:text="@string/authorization" android:layout_weight="0" android:layout_height="wrap_content" android:layout_width="wrap_content" />
+                <TextView style="@style/setting_item_title" android:text="@string/it_restart_after_changes" android:textColor="#0f0" android:textSize="13dp" android:textStyle="normal" android:layout_width="wrap_content"  />
             </LinearLayout>
 
             <LinearLayout style="@style/setting_item_settings" >
                   <LinearLayout style="@style/setting_item_settings_item">
-                        <TextView style="@style/setting_item_settings_name" android:text="Логин: " />
+                        <TextView style="@style/setting_item_settings_name" android:text="@string/login" />
                       <TextView android:id="@+id/login" style="@style/setting_item_settings_name" android:text="test" />
                 </LinearLayout>
 
                 <LinearLayout style="@style/setting_item_settings_item">
-                    <TextView style="@style/setting_item_settings_name"  android:text="Пароль: " />
+                    <TextView style="@style/setting_item_settings_name"  android:text="@string/password" />
                     <TextView android:id="@+id/password" style="@style/setting_item_settings_name"  android:password="true" android:text=""  />
                 </LinearLayout>
 
@@ -63,7 +63,7 @@
         <!--item flash lite -->
         <LinearLayout style="@style/setting_item_parent" android:id="@+id/setting_flash" >
 
-            <TextView style="@style/setting_item_title" android:text="Фонарик (Подсветка при сканировании)"/>
+            <TextView style="@style/setting_item_title" android:text="@string/flash_lite"/>
 
             <LinearLayout style="@style/setting_item_settings" >
                 <LinearLayout style="@style/setting_item_settings_item">
@@ -74,6 +74,10 @@
         </LinearLayout>
         <!--end item flash lite -->
 
+        <LinearLayout android:layout_height="0dp" android:background="#000" android:layout_weight="1" android:layout_width="fill_parent"/>
+
+        <TextView android:padding="10dp" android:textStyle="italic" android:layout_height="wrap_content" android:layout_width="fill_parent" android:background="#000"
+               android:text="* инструкцию по установки и файлы конфигурации 1С вы можете получить бесплатно на сайте http://droid-c.ru "  />
 
 
     </LinearLayout>

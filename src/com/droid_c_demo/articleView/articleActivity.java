@@ -1,4 +1,4 @@
-package com.droid_c_demo_.articleView;
+package com.droid_c_demo.articleView;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,11 +9,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.droid_c_demo_.R;
-import com.droid_c_demo_.db.DatabaseHelper;
-import com.droid_c_demo_.lib.fileLib;
-import com.droid_c_demo_.lib.saveFile;
-import com.droid_c_demo_.scanedList;
+import com.droid_c_demo.R;
+import com.droid_c_demo.db.DatabaseHelper;
+import com.droid_c_demo.lib.fileLib;
+import com.droid_c_demo.lib.saveFile;
+import com.droid_c_demo.scanedList;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
@@ -65,6 +65,13 @@ public class articleActivity extends Activity {
        try{ unit=Return.getElementsByTagName("m:Unit").item(0).getFirstChild().getNodeValue(); }catch (Exception e){}
         ((TextView) findViewById(R.id.articel_unit)).setText(unit);
 
+        // count_db
+        try{
+            String count_db_str=Return.getElementsByTagName("m:Count").item(0).getFirstChild().getNodeValue();
+            count_db=Integer.parseInt(count_db_str);
+        }catch (Exception e){}
+        ((TextView) findViewById(R.id.articel_count_db)).setText(""+count_db);
+
         findViewById(R.id.article_ok).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -94,7 +101,7 @@ private void nextView(){
     fileLib fl=new fileLib(con);
     String id_store= fl.read("currentCode").split(";")[2];
     DatabaseHelper dh=new DatabaseHelper(con);
-    double r= dh.insertToScaned(brCode,code_1C,name,article,fullName,count,id_store,unit);
+    double r= dh.insertToScaned(brCode,code_1C,name,article,fullName,count,id_store,unit,count_db);
     if(r>0){Toast.makeText(con,"добавлено",Toast.LENGTH_SHORT).show();}else {
         Toast.makeText(con,"ошибка добавления",Toast.LENGTH_SHORT).show();
     }
@@ -114,5 +121,6 @@ private void nextView(){
      String article="";
      String fullName="";
     String unit="";
+    int count_db=0;
 
 }

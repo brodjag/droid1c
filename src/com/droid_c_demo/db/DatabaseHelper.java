@@ -1,4 +1,4 @@
-package com.droid_c_demo_.db;
+package com.droid_c_demo.db;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -17,26 +17,31 @@ import android.util.Log;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     static final String dbName="tempDB";
-    static final int version=2;
+    static final int version=6;
     static final String storeDb="stores";
 
+    String createScanedDB="CREATE TABLE scaned (id integer PRIMARY KEY,barcode text,kod text,name text,article text,FullName text,count integer,id_store text, unit text, count_db integer)";
 
 
 
 
     public DatabaseHelper(Context context) {
         super(context, dbName, null,version);
+
     }
 
     public void onCreate(SQLiteDatabase db) {
 
         db.execSQL("CREATE TABLE stores (id INTEGER PRIMARY KEY, name TEXT, kod TEXT)");
         
-        db.execSQL("CREATE TABLE scaned (id integer PRIMARY KEY,barcode text,kod text,name text,article text,FullName text,count integer,id_store text, unit text)");
+        db.execSQL(createScanedDB);  //"CREATE TABLE scaned (id integer PRIMARY KEY,barcode text
+
+        db.execSQL("CREATE INDEX idx_barcode ON scaned (barcode)");
+        // ,kod text,name text,article text,FullName text,count integer,id_store text, unit text)"
 
         db.execSQL("CREATE TABLE setting (id INTEGER PRIMARY KEY, name TEXT, value TEXT)");
 
-        db.execSQL("Insert into setting (name, value)  values('url_pre','http://fpat.ru/DemoEnterprise')");
+        db.execSQL("Insert into setting (name, value)  values('url_pre','fpat.ru/ypptest')");
         db.execSQL("Insert into setting (name, value)  values('url_area','DroidC')");
         db.execSQL("Insert into setting (name, value)  values('login','admin')");
         db.execSQL("Insert into setting (name, value)  values('password','123')");
@@ -82,6 +87,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS "+"stores");
         db.execSQL("DROP TABLE IF EXISTS "+"scaned");
         db.execSQL("DROP TABLE IF EXISTS "+"setting");
+        db.execSQL("DROP INDEX IF EXISTS idx_barcode");
 
          /*
         db.execSQL("DROP TABLE IF EXISTS "+employeeTable);
@@ -129,9 +135,9 @@ public void removeAllStores(){
 /***************************************
  scaned
  ***************************************/
-public long insertToScaned(String barcode, String kod, String name, String article, String FullName,int count, String id_store, String unit ) {
+public long insertToScaned(String barcode, String kod, String name, String article, String FullName,int count, String id_store, String unit,int count_db ) {
     SQLiteDatabase db=this.getWritableDatabase();
-    ContentValues cv=new ContentValues();
+    ContentValues cv=new ContentValues(8);
     cv.put("barcode" ,barcode);
     cv.put("kod" ,kod);
     cv.put("name" ,name);
@@ -141,6 +147,7 @@ public long insertToScaned(String barcode, String kod, String name, String artic
     cv.put("count",count);
     cv.put("id_store",id_store);
     cv.put("unit",unit);
+    cv.put("count_db", count_db );
     long  res=db.insert("scaned",null,cv);
     db.close();
     return res;
@@ -148,33 +155,53 @@ public long insertToScaned(String barcode, String kod, String name, String artic
 
 public Cursor getAllScaned(String id_store)
     {
+
+        long seconds = System.currentTimeMillis();
+
         SQLiteDatabase db=this.getReadableDatabase();
         Cursor cur=db.rawQuery("SELECT * from scaned where id_store=?",new String [] {id_store});
         cur.moveToFirst();
         db.close();
+        long seconds2 = System.currentTimeMillis();
+        Log.d("getScanedById", "delta="+(seconds2-seconds));
         return cur;
     }
     public void removeAllScaned(){
         SQLiteDatabase db=this.getWritableDatabase();
         db.execSQL("DROP TABLE IF EXISTS "+"scaned");
-        db.execSQL("CREATE TABLE scaned (id integer PRIMARY KEY,barcode text,kod text,name text,article text,FullName text,count integer,id_store text, unit text)");
+        db.execSQL(createScanedDB);
         db.close();
     };
 
-    public void removeScanedId(String id)
+    public int removeScanedId(String id)
     {
         SQLiteDatabase db=this.getWritableDatabase();
-        db.delete("scaned","id=?",new String[]{id});
+        int res= db.delete("scaned","id=?",new String[]{id});
         db.close();
-
+        return res;
     }
+
+    public int removeScanedByStoreId(String id)
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        int res= db.delete("scaned","id_store=?",new String[]{id});
+
+        db.close();
+       return  res;
+    }
+
+
 
     public Cursor getScanedById(String id)
     {
+
+
         SQLiteDatabase db=this.getReadableDatabase();
         Cursor cur=db.rawQuery("SELECT * from scaned where id=?",new String [] {id});
         cur.moveToFirst();
         db.close();
+
+
         return cur;
     }
 
@@ -191,19 +218,33 @@ public Cursor getAllScaned(String id_store)
 
     public int getScanedIdByBare(String barcode,String id_store)
     {
+
+
         SQLiteDatabase db=this.getReadableDatabase();
+        long seconds = System.currentTimeMillis();
         Cursor cur;
       // String s= String.format("SELECT * from scaned where barcode='"+barcode+"' ",new String [] {});
       //  Log.d("selectBare", s);
 
-        cur= db.rawQuery("SELECT * from scaned where barcode='"+barcode+"' and id_store=?",new String [] {id_store});
+       cur= db.rawQuery("SELECT * from scaned where barcode=? and id_store=?",new String [] {barcode, id_store});
+       // cur=db.query("scaned",new String[] { "*" },"barcode=? and id_store=?",new String []{barcode, id_store},null,null,null,null);
+
+
+        long seconds2 = System.currentTimeMillis();
+        Log.d("getScanedIdByBare", "delta="+(seconds2-seconds));
+
         cur.moveToFirst();
         int res=-1;
         if(cur.getCount()>0){res=cur.getInt(0); }
         db.close();
-         cur.close();
+        cur.close();
         return res;
     }
+
+public void deleteStorageList(String idStorage){
+
+
+}
 
 //********************************
 //setting values
@@ -259,9 +300,17 @@ public String getSetting(String value){
    public String getURL(){
     String res="";
        Log.d("url_",res);
-   res= getSetting("url_pre")+"/ws/"+getSetting("url_area")+".1cws";
+   res="http://"+ getSetting("url_pre")+"/ws/"+getSetting("url_area")+".1cws";
        Log.d("url_",res);
    return  res;
    }
+
+
+/**************************************
+ * upload
+  ***************************/
+
+
+
 
 }

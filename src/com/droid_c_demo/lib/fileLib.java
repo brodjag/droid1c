@@ -1,4 +1,4 @@
-package com.droid_c_demo_.lib;
+package com.droid_c_demo.lib;
 
 
 import android.content.Context;

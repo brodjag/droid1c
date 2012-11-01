@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Droid-C (Демо)</string>
+
+    <string name="setting">Настройки</string>
+    <string name="upload">Выгрузка в 1С</string>
+    <string name="clean_list">Удалить список</string>
+
+    <!--article -->
+    <string name="description_article_title">Описание продукта</string>
+    <string name="name_long">название полное: </string>
+    <string name="bare_code">штрихкод: </string>
+    <string name="name_">Название: </string>
+    <string name="article_id">Артикль: </string>
+    <string name="units">Еденицы: </string>
+    <string name="booking_count">к-во учет: </string>
+    <string name="real_count">фактическое кол-во</string>
+
+    <!--manual enter bare code  -->
+    <string name="manual_enter">Ручной ввод штрихкода</string>
+
+    <!--scan list -->
+    <string name="store">Склад</string>
+    <string name="scanbr">сканировать</string>
+
+    <string name="select_store">Выбор склада</string>
+
+    <!--settings -->
+    <string name="server_settings_title">Настройки сервера</string>
+    <string name="url">Путь: </string>
+    <string name="enter_url">введите путь до службы</string>
+    <string name="name_area">пространство имен: </string>
+    <string name="enter_names_area">ввелите пространство имен</string>
+    <string name="on_ok_cklicking_all_remov">При нажатии кнопки \'ввод\' данные списков будут удалены.</string>
+    <string name="cansel"> Отмена </string>
+    <string name="ok"> Ввод </string>
+
+    <!--autorisation setting -->
+    <string name="authorization">Авторизация</string>
+    <string name="login">Логин: </string>
+    <string name="password">Пароль: </string>
+    <string name="enter_login">введите логин</string>
+    <string name="enter_password">введите пароль</string>
+
+    <!--settings -->
+    <string name="settings_title">Настройки</string>
+    <string name="server">Сервер</string>
+    <string name="if_u_change_all_clean">(При изменениии все списки будут очищены!)</string>
+    <string name="it_restart_after_changes">(Изменение приведет к перезапуску!)</string>
+    <string name="flash_lite">Фонарик (Подсветка при сканировании)</string>
+
+</resources>

@@ -1,4 +1,4 @@
-package com.droid_c_demo_;
+package com.droid_c_demo;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.droid_c_demo_.db.DatabaseHelper;
+import com.droid_c_demo.db.DatabaseHelper;
 
 /**
  * Created by IntelliJ IDEA.
@@ -66,7 +66,17 @@ public class articleEdit extends Activity {
         final String fullName=c.getString(5);
         ((TextView) findViewById(R.id.articel_name_full)).setText(fullName);
 
+        //unit
+        final String unit=c.getString(8);
+        ((TextView) findViewById(R.id.articel_unit)).setText(unit) ;
+
+        //count_db
+        final String count_db=c.getString(9);
+        ((TextView) findViewById(R.id.articel_count_db)).setText(""+count_db);
+
         ((EditText) con.findViewById(R.id.article_v_count)).setText(c.getString(6));
+
+
 
         findViewById(R.id.article_ok).setOnClickListener(new View.OnClickListener() {
             @Override

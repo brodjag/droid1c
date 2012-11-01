@@ -4,13 +4,11 @@
  * 
  * Created by lisah0 on 2012-02-24
  */
-package com.droid_c_demo_;
+package com.droid_c_demo;
 
 import android.app.Activity;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
+import android.app.AlertDialog;
+import android.content.*;
 import android.content.pm.ActivityInfo;
 import android.hardware.Camera;
 import android.hardware.Camera.AutoFocusCallback;
@@ -21,13 +19,10 @@ import android.os.Handler;
 import android.os.Vibrator;
 import android.view.*;
 import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-import com.droid_c_demo_.articleView.articleRequest;
-import com.droid_c_demo_.db.DatabaseHelper;
-import com.droid_c_demo_.lib.CameraPreview;
+import android.widget.*;
+import com.droid_c_demo.articleView.articleRequest;
+import com.droid_c_demo.db.DatabaseHelper;
+import com.droid_c_demo.lib.CameraPreview;
 import net.sourceforge.zbar.*;
 
 /* Import ZBar Class files */
@@ -318,7 +313,7 @@ void cameraOn(){
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
+        inflater.inflate(R.menu.menu_scaner, menu);
         return true;
     }
 
@@ -333,11 +328,48 @@ void cameraOn(){
                 con.startActivity(setting);
                 con.finish();
                 break;
-            case R.id.export:     Toast.makeText(this, "Функция выгрузки в процессе разработки", Toast.LENGTH_LONG).show();
+            case R.id.search_hand: showDailog();
                 break;
             // case R.id.info: Toast.makeText(this, "You pressed the icon and info!", Toast.LENGTH_LONG).show();
             //    break;
         }
         return true;
     }
+
+    /**
+     * Create and return an example alert dialog with an edit text box.
+     */
+
+        void showDailog(){
+
+            final View v=con.getLayoutInflater().inflate(R.layout.dialog_enter_barecode,null) ;
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+            builder.setMessage("Введите штрихкод в ручную ")
+                    .setCancelable(true)
+                    .setTitle("руччной ввод")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                              String bare= ((EditText) v.findViewById(R.id.bcode_entered)).getText().toString();
+                              ///Toast.makeText(con,bare,Toast.LENGTH_SHORT).show();
+                            new articleRequest(con,bare) ;
+                        }
+                    })
+                    .setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                        }
+                    })
+                    .setView(v);
+            AlertDialog alert = builder.create();
+            alert.show();
+
+        }
+
+
+
+
 }
+

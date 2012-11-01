@@ -1,8 +1,7 @@
-package com.droid_c_demo_.db;
+package com.droid_c_demo.db;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 /**
@@ -16,10 +15,12 @@ public class sqliteActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Toast.makeText(this,"db!",Toast.LENGTH_SHORT).show();
-       DatabaseHelper dh=new DatabaseHelper(this);
-       dh.setSetting("qq","b-qq");
+      DatabaseHelper dh=new DatabaseHelper(this);
+        //dh.q();
+       //dh.setSetting("qq","b-qq");
 
-        Log.d("setting",   dh.getSetting("qqq")) ;
+       // Log.d("setting",   dh.getSetting("qqq")) ;
+       // new uploadRequest(this);
         
     }
 }

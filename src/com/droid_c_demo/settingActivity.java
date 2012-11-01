@@ -1,4 +1,4 @@
-package com.droid_c_demo_;
+package com.droid_c_demo;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -8,7 +8,7 @@ import android.os.Vibrator;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
-import com.droid_c_demo_.db.DatabaseHelper;
+import com.droid_c_demo.db.DatabaseHelper;
 
 /**
  * Created with IntelliJ IDEA.
@@ -157,6 +157,7 @@ public void myBackFunction(){
     if (back==backToScanList){startActivity(new Intent(con, scanedList.class));}
     if (back==backToSelectStore){startActivity(new Intent(con, select_store.class));}
     if (back==backToScan){startActivity(new Intent(con, ScanActivity.class));}
+    finish();
    // Toast.makeText(con,"переход на нужный экран",Toast.LENGTH_SHORT).show();
 }
 

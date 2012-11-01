@@ -1,4 +1,4 @@
-package com.droid_c_demo_;
+package com.droid_c_demo;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,9 +11,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-import com.droid_c_demo_.db.DatabaseHelper;
-import com.droid_c_demo_.lib.fileLib;
+import com.droid_c_demo.db.DatabaseHelper;
+import com.droid_c_demo.lib.fileLib;
 
 /**
  * Created with IntelliJ IDEA.
@@ -88,7 +87,8 @@ public class select_store extends Activity {
                 con.startActivity(setting);
                 con.finish();
                 break;
-            case R.id.export:     Toast.makeText(this, "Функция выгрузки в процессе разработки", Toast.LENGTH_LONG).show();
+            case R.id.export:   //  Toast.makeText(this, "Функция выгрузки в процессе разработки", Toast.LENGTH_LONG).show();
+                new uploadRequest(this);
                 break;
             // case R.id.info: Toast.makeText(this, "You pressed the icon and info!", Toast.LENGTH_LONG).show();
             //    break;

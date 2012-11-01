@@ -1,4 +1,4 @@
-package com.droid_c_demo_;
+package com.droid_c_demo;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -6,9 +6,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
-import com.droid_c_demo_.db.DatabaseHelper;
-import com.droid_c_demo_.lib.soap;
+import com.droid_c_demo.db.DatabaseHelper;
+import com.droid_c_demo.lib.soap;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
@@ -28,6 +29,8 @@ public class splashActivity extends Activity {
         super.onCreate(savedInstanceState);
         con=this;
         setContentView(R.layout.splash);
+       if (_setting.lite) ((TextView) findViewById(R.id.title1)).setText("Droid-C (демо)");
+
         DatabaseHelper dh=new DatabaseHelper(con);
         url=dh.getURL();
         login=dh.getSetting("login");

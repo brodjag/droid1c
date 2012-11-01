@@ -1,0 +1,14 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/edit_name"
+              android:layout_width="fill_parent" android:layout_height="wrap_content"
+              android:layout_gravity="center" android:orientation="vertical"  >
+
+    <TextView
+      android:visibility="gone" android:id="@+id/lbl_your_name" android:text="@string/manual_enter"
+            android:layout_width="wrap_content" android:layout_height="wrap_content" />
+
+    <EditText
+            android:id="@+id/bcode_entered"
+            android:layout_width="fill_parent"  android:layout_height="wrap_content"
+            android:inputType="phone" android:digits="0123456789" android:imeOptions="actionDone" />
+</LinearLayout>

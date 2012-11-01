@@ -1,4 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Droid-C (демо)</string>
+    <string name="app_name">Droid-C (Demo)</string>
+
+    <string name="setting">Settings</string>
+    <string name="upload">Upload to POS</string>
+    <string name="clean_list">Clear list</string>
+
+    <!--article -->
+    <string name="description_article_title">Article description </string>
+    <string name="name_long">Name long:</string>
+    <string name="bare_code">bare code:</string>
+    <string name="name_">Name: </string>
+    <string name="article_id">Article id: </string>
+    <string name="units">Units:</string>
+    <string name="booking_count">Booking count:</string>
+    <string name="real_count">Real count</string>
+
+    <!--manual enter bare code  -->
+    <string name="manual_enter">Manual bare-code enter</string>
+
+    <!--scan list -->
+    <string name="store">Storage</string>
+    <string name="scanbr">Scan bare-code </string>
+
+    <string name="select_store">Select storage</string>
+
+    <!--settings -->
+    <string name="server_settings_title">Server settings</string>
+    <string name="url">URL: </string>
+    <string name="enter_url">plz enter URL to service</string>
+    <string name="name_area">Name area: </string>
+    <string name="enter_names_area">plz enter name area</string>
+    <string name="on_ok_cklicking_all_remov">If U cklick ok, all list will be removed </string>
+    <string name="cansel"> Cancel </string>
+    <string name="ok"> Enter </string>
+
+    <!--autorisation setting -->
+    <string name="authorization">Authorization</string>
+    <string name="login">Login: </string>
+    <string name="password">Password: </string>
+    <string name="enter_login">plz enter login</string>
+    <string name="enter_password">plz enter pasword</string>
+
+    <!--settings -->
+    <string name="settings_title">Settings</string>
+    <string name="server">Server</string>
+    <string name="if_u_change_all_clean">(If U change it all list will be removed!)</string>
+    <string name="it_restart_after_changes">(changes does restart!)</string>
+    <string name="flash_lite">Flash Lite </string>
+
 </resources>
